@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://be18pwgo6mtin"]
+
+[ext_resource type="Texture2D" uid="uid://xlteh8jgne4l" path="res://assets/ranking.png" id="1_1ordn"]
+[ext_resource type="Script" uid="uid://nty442up2a5y" path="res://scenes/OptionsMenu.gd" id="1_txsk3"]
+[ext_resource type="Texture2D" uid="uid://g57qa344iktt" path="res://assets/Home.png" id="3_3bi6k"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i8vua"]
+texture = ExtResource("3_3bi6k")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iu0qg"]
+texture = ExtResource("3_3bi6k")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8loje"]
+texture = ExtResource("3_3bi6k")
+
+[node name="OptionsMenu" type="Node2D"]
+script = ExtResource("1_txsk3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+z_as_relative = false
+position = Vector2(428, 470)
+scale = Vector2(1.1224, 1.0787)
+texture = ExtResource("1_1ordn")
+
+[node name="VolumeSlider" type="HSlider" parent="."]
+z_index = 1
+offset_left = 233.0
+offset_top = 346.0
+offset_right = 680.0
+offset_bottom = 455.0
+min_value = -60.0
+max_value = 0.0
+
+[node name="BackButton" type="Button" parent="."]
+z_index = 1
+offset_left = 399.0
+offset_top = 246.0
+offset_right = 524.0
+offset_bottom = 296.0
+theme_override_styles/hover = SubResource("StyleBoxTexture_i8vua")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_iu0qg")
+theme_override_styles/normal = SubResource("StyleBoxTexture_8loje")

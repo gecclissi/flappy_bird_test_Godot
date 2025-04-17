@@ -1,0 +1,32 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="flappy_bird_tut"
+run/main_scene="res://scenes/StartMenu.tscn"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+VarsGlobal="*res://scenes/vars_global.gd"
+GlobalMusic="*res://scenes/GlobalMusic.tscn"
+ApiManager="*res://scenes/ApiManager.gd"
+MultplayerManager="*res://scenes/multplayer_manager.gd"
+
+[display]
+
+window/size/viewport_width=864
+window/size/viewport_height=936
+
+[dotnet]
+
+project/assembly_name="flappy_bird_tut"

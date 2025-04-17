@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://bw6ramwnq8w3y"]
+
+[ext_resource type="Script" uid="uid://dv1cnkvg61ael" path="res://scenes/gameMultplay/bird.gd" id="1_mwd3b"]
+[ext_resource type="Texture2D" uid="uid://dfuofh4nwer0n" path="res://assets/bird1.png" id="2_bwnt4"]
+[ext_resource type="Texture2D" uid="uid://533ubvnyvpxe" path="res://assets/bird2.png" id="3_yrg8o"]
+[ext_resource type="Texture2D" uid="uid://cb3fw6j2c364v" path="res://assets/bird3.png" id="4_m0e4u"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xn4pq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bwnt4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yrg8o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_m0e4u")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0hppq"]
+radius = 18.0
+height = 52.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_y7nex"]
+properties/0/path = NodePath(".:sync_position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Bird" type="CharacterBody2D"]
+script = ExtResource("1_mwd3b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xn4pq")
+animation = &"flying"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0hppq")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_y7nex")

@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://cjcirlf1dcrep"]
+
+[ext_resource type="Script" uid="uid://cf7x8snskmfxd" path="res://scenes/multplayer_controller.gd" id="1_fksjn"]
+[ext_resource type="Script" uid="uid://dn8dr45b0yo8w" path="res://scenes/multiplayer_input.gd" id="2_0oxa8"]
+[ext_resource type="Texture2D" uid="uid://dfuofh4nwer0n" path="res://assets/bird1.png" id="2_8jhsr"]
+[ext_resource type="Texture2D" uid="uid://533ubvnyvpxe" path="res://assets/bird2.png" id="3_fl2f6"]
+[ext_resource type="Texture2D" uid="uid://cb3fw6j2c364v" path="res://assets/bird3.png" id="4_awf8u"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5h6tt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_boh8s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8jhsr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fl2f6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_awf8u")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x3nji"]
+radius = 18.0
+height = 52.0
+
+[node name="MultiplayerPlayer" type="CharacterBody2D"]
+script = ExtResource("1_fksjn")
+
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_5h6tt")
+script = ExtResource("2_0oxa8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_boh8s")
+animation = &"flying"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_x3nji")

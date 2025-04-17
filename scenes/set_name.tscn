@@ -1,0 +1,154 @@
+[gd_scene load_steps=16 format=3 uid="uid://bicgknuoanmh7"]
+
+[ext_resource type="Script" uid="uid://dg7t7xifvxmk" path="res://scenes/set_name.gd" id="1_e1gd3"]
+[ext_resource type="Texture2D" uid="uid://xlteh8jgne4l" path="res://assets/ranking.png" id="1_fwm3b"]
+[ext_resource type="Texture2D" uid="uid://cpb6qmej7rl6x" path="res://assets/start.png" id="3_wn08n"]
+[ext_resource type="Texture2D" uid="uid://br0blcothbbn6" path="res://assets/continue.png" id="4_ue2ui"]
+[ext_resource type="Texture2D" uid="uid://b0il51168kbxk" path="res://assets/new.png" id="5_1ltn2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ehtrt"]
+texture = ExtResource("3_wn08n")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sy3q6"]
+texture = ExtResource("3_wn08n")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y1jma"]
+texture = ExtResource("3_wn08n")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2flsm"]
+texture = ExtResource("3_wn08n")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hkhnd"]
+texture = ExtResource("4_ue2ui")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_at3v3"]
+texture = ExtResource("4_ue2ui")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b8hlg"]
+texture = ExtResource("4_ue2ui")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p7lim"]
+texture = ExtResource("5_1ltn2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vbsml"]
+texture = ExtResource("5_1ltn2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bwqcm"]
+texture = ExtResource("5_1ltn2")
+
+[node name="SetName" type="Node2D"]
+script = ExtResource("1_e1gd3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+z_as_relative = false
+position = Vector2(429, 470)
+scale = Vector2(1.1224, 1.0787)
+texture = ExtResource("1_fwm3b")
+
+[node name="NameInput" type="LineEdit" parent="."]
+z_index = 1
+offset_left = 298.0
+offset_top = 286.0
+offset_right = 546.0
+offset_bottom = 336.0
+placeholder_text = "Digite seu nickname"
+alignment = 1
+
+[node name="StartButton" type="Button" parent="."]
+z_index = 1
+offset_left = 371.0
+offset_top = 373.0
+offset_right = 487.0
+offset_bottom = 421.0
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_ehtrt")
+theme_override_styles/hover = SubResource("StyleBoxTexture_sy3q6")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_y1jma")
+theme_override_styles/normal = SubResource("StyleBoxTexture_2flsm")
+
+[node name="ErrorNick" type="AcceptDialog" parent="StartButton"]
+initial_position = 2
+size = Vector2i(166, 100)
+dialog_text = "Nick Name invalido"
+
+[node name="ChangeNickButton" type="Button" parent="."]
+visible = false
+z_index = 1
+offset_left = 528.0
+offset_top = 130.0
+offset_right = 699.0
+offset_bottom = 186.0
+text = "Trocar Nome"
+
+[node name="ErrorNick" type="AcceptDialog" parent="ChangeNickButton"]
+auto_translate_mode = 1
+initial_position = 2
+size = Vector2i(166, 100)
+dialog_text = "Nick Name invalido"
+
+[node name="NameChangeInput" type="LineEdit" parent="."]
+visible = false
+z_index = 1
+offset_left = 227.0
+offset_top = 130.0
+offset_right = 515.0
+offset_bottom = 185.0
+placeholder_text = "Digite o novo nome"
+alignment = 1
+
+[node name="Control" type="Control" parent="."]
+visible = false
+z_index = 1
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 216.0
+offset_top = 247.0
+offset_right = 611.0
+offset_bottom = 557.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemList" type="ItemList" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.5
+offset_top = -141.0
+offset_right = 249.5
+offset_bottom = 186.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContinueGameButton" type="Button" parent="."]
+visible = false
+z_index = 1
+offset_left = 465.0
+offset_top = 608.0
+offset_right = 603.0
+offset_bottom = 664.0
+theme_override_styles/hover = SubResource("StyleBoxTexture_hkhnd")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_at3v3")
+theme_override_styles/normal = SubResource("StyleBoxTexture_b8hlg")
+disabled = true
+
+[node name="NewGameButton" type="Button" parent="."]
+visible = false
+z_index = 1
+offset_left = 286.0
+offset_top = 606.0
+offset_right = 408.0
+offset_bottom = 658.0
+theme_override_styles/hover = SubResource("StyleBoxTexture_p7lim")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_vbsml")
+theme_override_styles/normal = SubResource("StyleBoxTexture_bwqcm")
+
+[connection signal="pressed" from="ChangeNickButton" to="." method="_on_change_nick_button_pressed"]
+[connection signal="pressed" from="ContinueGameButton" to="." method="_on_continue_game_button_pressed"]
+[connection signal="pressed" from="NewGameButton" to="." method="_on_new_game_button_pressed"]

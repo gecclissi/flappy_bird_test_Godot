@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://djypu30tur0tk"]
+
+[ext_resource type="Script" uid="uid://drxuj7lkdxcn7" path="res://scenes/gameMultplay/main.gd" id="1_iep4r"]
+[ext_resource type="PackedScene" uid="uid://dke7ascjb1x7i" path="res://scenes/gameMultplay/pipe.tscn" id="2_bui1s"]
+[ext_resource type="Texture2D" uid="uid://d38ceuoo614k4" path="res://assets/bg.png" id="3_nm0l1"]
+[ext_resource type="PackedScene" uid="uid://bvjrqmso7nghw" path="res://scenes/game/bird.tscn" id="4_a0lch"]
+[ext_resource type="PackedScene" uid="uid://cm1ouad7aycy" path="res://scenes/game/ground.tscn" id="5_15aqj"]
+[ext_resource type="Script" uid="uid://dv1cnkvg61ael" path="res://scenes/gameMultplay/bird.gd" id="5_18jri"]
+[ext_resource type="PackedScene" uid="uid://ivec7s5petab" path="res://scenes/gameMultplay/game_over.tscn" id="6_fhw4y"]
+[ext_resource type="Texture2D" uid="uid://g57qa344iktt" path="res://assets/Home.png" id="7_4b2bl"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_foui1"]
+texture = ExtResource("7_4b2bl")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nfhxr"]
+texture = ExtResource("7_4b2bl")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_83dgo"]
+texture = ExtResource("7_4b2bl")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pwqke"]
+properties/0/path = NodePath("Bird:sync_position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Ground:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("ScoreLabel:text")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Players:position")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[node name="Main" type="Node"]
+script = ExtResource("1_iep4r")
+pipe_scene = ExtResource("2_bui1s")
+bird_scene = ExtResource("4_a0lch")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("3_nm0l1")
+offset = Vector2(432, 384)
+
+[node name="Bird" parent="." instance=ExtResource("4_a0lch")]
+script = ExtResource("5_18jri")
+
+[node name="Ground" parent="." instance=ExtResource("5_15aqj")]
+z_index = 1
+
+[node name="PipeTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="ScoreLabel" type="Label" parent="."]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -85.0
+offset_right = 85.0
+offset_bottom = 58.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "SCORE: 0"
+
+[node name="GameOver" parent="." instance=ExtResource("6_fhw4y")]
+
+[node name="StartButton" type="Button" parent="."]
+light_mask = 512
+visibility_layer = 512
+z_index = 10
+offset_left = 69.0
+offset_top = 35.0
+offset_right = 194.0
+offset_bottom = 85.0
+theme_override_styles/hover = SubResource("StyleBoxTexture_foui1")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nfhxr")
+theme_override_styles/normal = SubResource("StyleBoxTexture_83dgo")
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_pwqke")
+
+[connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
+[connection signal="restart" from="GameOver" to="." method="_on_game_over_restart"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

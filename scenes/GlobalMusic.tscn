@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://3sgda38f88g4"]
+
+[ext_resource type="AudioStream" uid="uid://dp3dmqmhpqom7" path="res://music/Through-the-Gauntlet.mp3" id="1_vlc3r"]
+
+[node name="GlobalMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_vlc3r")
+volume_db = -33.73
+autoplay = true
+mix_target = 1
+parameters/looping = true

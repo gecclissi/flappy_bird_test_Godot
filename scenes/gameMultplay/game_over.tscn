@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://ivec7s5petab"]
+
+[ext_resource type="Script" uid="uid://paiqc3eyjdxc" path="res://scenes/gameMultplay/game_over.gd" id="1_2di3b"]
+[ext_resource type="Texture2D" uid="uid://c57fej47adq38" path="res://assets/restart.png" id="2_27pwn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tftqu"]
+texture = ExtResource("2_27pwn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8hnhm"]
+texture = ExtResource("2_27pwn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5q2wo"]
+texture = ExtResource("2_27pwn")
+
+[node name="GameOver" type="CanvasLayer"]
+script = ExtResource("1_2di3b")
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -201.0
+offset_top = -242.0
+offset_right = 194.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemList" type="ItemList" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.5
+offset_top = -164.0
+offset_right = 254.5
+offset_bottom = 163.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RestartButton" type="Button" parent="."]
+visible = false
+offset_left = 235.0
+offset_top = 580.0
+offset_right = 395.0
+offset_bottom = 643.0
+theme_override_styles/hover = SubResource("StyleBoxTexture_tftqu")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8hnhm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_5q2wo")
+
+[node name="ContinueButton" type="Button" parent="."]
+visible = false
+offset_left = 484.0
+offset_top = 576.0
+offset_right = 622.0
+offset_bottom = 645.0
+text = "Continue"
+
+[connection signal="visibility_changed" from="." to="." method="_on_game_over_visibility_changed"]
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]
